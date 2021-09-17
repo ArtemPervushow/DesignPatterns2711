@@ -9,7 +9,8 @@ public class Demo {
                 try {
                     Thread.sleep(new Random().nextInt(200));
 
-                    ConnectionResource resource = ConnectionPoolGrowLimit.getConnectionFromPool();
+                    Resource resource = new Resource();
+                    resource.setConnectionResource(ConnectionPoolGrowLimit.getConnectionFromPool());
                     resource.work();
 
                     Thread.sleep(new Random().nextInt(200));

@@ -18,12 +18,16 @@ public class ConnectionPoolGrowLimit {
             ConnectionResource connectionResource = resourceList
                     .get(resourceList.size() - 1);
             resourceList.remove(connectionResource);
-
+            if(resourceList.size() > 14){
+                capacity--;
+                System.out.println("pool: "+ resourceList.size() + "; max_pool: " + capacity);
+            }
             return connectionResource;
         } else {
-            if(capacity <= 20) {
+            if(capacity < 20) {
                 ConnectionResource connectionResource = new ConnectionResource();
                 capacity++;
+                System.out.println("pool: "+ resourceList.size() + "; max_pool: " + capacity);
                 return connectionResource;
             } else {
                 Thread.sleep(500);
@@ -32,7 +36,8 @@ public class ConnectionPoolGrowLimit {
         }
     }
 
-    public static void returnConnectionToPool(ConnectionResource connectionResource) {
-        resourceList.add(connectionResource);
+    public static void returnConnectionToPool(Resource resource) {
+        resourceList.add(resource.getConnectionResource());
+        resource.setConnectionResource(null);
     }
 }
