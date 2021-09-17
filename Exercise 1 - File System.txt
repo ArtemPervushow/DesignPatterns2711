@@ -1,0 +1,45 @@
+class FS {
+    List<FSItem> entryList
+}
+
+
+interface FSItem {
+    +String getName()
+    +void setName()
+    +String getPath()
+    +FSItem getParent()
+}
+
+class Directory implements FSItem {
+    -List<FSItem> children
+    -String name
+    
+    +List<FSItem> getChildren()
+    +boolean isFileSystem()
+    +String getName()
+    +void setName()
+    +String getPath()
+    +FSItem getParent()
+}
+
+class File implements FSItem {
+    -String name
+    
+    +String getName()
+    +void setName()
+    +String getPath()
+    +FSItem getParent()
+}
+
+class Link implements FSItem {
+    -String name
+    -FSItem link
+    
+    +FSItem getLink()
+    +String getName()
+    +void setName()
+    +String getPath()
+    +FSItem getParent()
+}
+
+FS --* FSItem: have
