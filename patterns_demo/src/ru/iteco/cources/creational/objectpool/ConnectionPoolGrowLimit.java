@@ -4,35 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectionPoolGrowLimit {
-    private static List<ConnectionResource> resourceList = new ArrayList<>();
-    private static volatile short capacity = 10;
+    private static List<ConnectionResource> resources;
+    private static short capacity = 10;
+    private static final int maxValue = capacity;
 
     static {
-        for (int i = 0; i < 10; i++) {
-            resourceList.add(new ConnectionResource());
+        resources = new ArrayList<>();
+        for (int i = 0; maxValue > i; i++) {
+            resources.add(new ConnectionResource());
         }
     }
 
     public static ConnectionResource getConnectionFromPool() throws Exception {
-        if(resourceList.size() > 0) {
-            ConnectionResource connectionResource = resourceList
-                    .get(resourceList.size() - 1);
-            resourceList.remove(connectionResource);
-
+        if (resources.size() > 0) {
+            return resources.remove(resources.size() - 1);
+        } else if (capacity <= 20) {
+            var connectionResource = new ConnectionResource();
+            capacity++;
             return connectionResource;
         } else {
-            if(capacity <= 20) {
-                ConnectionResource connectionResource = new ConnectionResource();
-                capacity++;
-                return connectionResource;
-            } else {
-                Thread.sleep(500);
-                return getConnectionFromPool();
-            }
+            Thread.sleep(500);
+            return getConnectionFromPool();
         }
     }
 
-    public static void returnConnectionToPool(ConnectionResource connectionResource) {
-        resourceList.add(connectionResource);
+    public static void releaseConnectionToPool(ConnectionResource connection) {
+        if (capacity > maxValue && resources.size() == maxValue) {
+            connection.close();
+            capacity--;
+        } else {
+            connection.close();
+            resources.add(new ConnectionResource());
+        }
     }
 }
+
