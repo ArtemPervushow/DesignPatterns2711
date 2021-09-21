@@ -1,0 +1,19 @@
+class MenuItem {
+    -String name
+    -String description
+    -boolean vegetarian
+    -double price
+    +MenuItem(String name, String description, boolean vegetarian, double price)
+}
+
+class BistroMenu extends MenuItem {
+    -List<MenuItem> items
+    +List<MenuItem> getMenuItems()
+}
+
+class Waitress {
+   -List<MenuItem> order
+   +addMenuItemToOrder(MenuItem item)
+   +removeMenuItemFromOrder(MenuItem item)
+   +List<MenuItem> getCurrentOrder()
+}
