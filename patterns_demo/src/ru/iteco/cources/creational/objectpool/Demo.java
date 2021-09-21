@@ -15,6 +15,9 @@ public class Demo {
                     Thread.sleep(new Random().nextInt(200));
                     ConnectionPoolGrowLimit.returnConnectionToPool(resource);
 
+                    System.out.println("try work on returned resource " + Thread.currentThread().getName());
+                    resource.work();
+
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
