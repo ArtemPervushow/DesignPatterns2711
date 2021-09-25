@@ -1,0 +1,79 @@
+interface CurrencyDao {
+    +create(Currrency currency)
+    +Currency read(Id id)
+    +update(Currency currency)
+    +delete(Currency currency)
+}
+
+interface ItemDao  {
+    +create(Item item)
+    +Item read(Id id)
+    +update(Item item)
+    +delete(Item item)
+}
+
+class SqlDbCurrencyDaoImpl implements CurrencyDao {
+    +create(Currrency currency)
+    +Currency read(Id id)
+    +update(Currency currency)
+    +delete(Currency currency)
+}
+
+class ObjDbCurrencyDaoImpl implements CurrencyDao {
+    +create(Currrency currency)
+    +Currency read(Id id)
+    +update(Currency currency)
+    +delete(Currency currency)
+}
+
+class XmlDbCurrencyDaoImpl implements CurrencyDao {
+    +create(Currrency currency)
+    +Currency read(Id id)
+    +update(Currency currency)
+    +delete(Currency currency)
+}
+
+class SqlDbItemDaoImpl implements ItemDao {
+    +create(Item item)
+    +Item read(Id id)
+    +update(Item item)
+    +delete(Item item)
+}
+
+class ObjDbItemDaoImpl implements ItemDao {
+    +create(Item item)
+    +Item read(Id id)
+    +update(Item item)
+    +delete(Item item)
+}
+
+class XmlDbItemDaoImpl implements ItemDao {
+    +create(Item item)
+    +Item read(Id id)
+    +update(Item item)
+    +delete(Item item)
+}
+
+interface Factory {
+    +ItemDao createItemDao()
+    +CurrencyDao createCurrencyDao()
+}
+ 
+class SqlDbFactory implements Factory {
+    +ItemDao createItemDao()
+    +CurrencyDao createCurrencyDao()
+}
+
+class ObjDbFactory implements Factory {
+    +ItemDao createItemDao()
+    +CurrencyDao createCurrencyDao()
+}
+
+class XmlDbFactory implements Factory {
+    +ItemDao createItemDao()
+    +CurrencyDao createCurrencyDao()
+}
+
+class FactoryProducer {
+    Factory createFactory(String databaseType)
+}
