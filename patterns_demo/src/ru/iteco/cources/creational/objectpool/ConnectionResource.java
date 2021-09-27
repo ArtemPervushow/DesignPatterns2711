@@ -2,8 +2,8 @@ package ru.iteco.cources.creational.objectpool;
 
 import java.util.Random;
 
-public class ConnectionResource {
-    public void work(){
+public class ConnectionResource implements AutoCloseable {
+    public void work() {
         try {
             System.out.println("Now working " + Thread.currentThread().getName());
             Thread.sleep(new Random().nextInt(2000));
@@ -11,5 +11,10 @@ public class ConnectionResource {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() {
+
     }
 }

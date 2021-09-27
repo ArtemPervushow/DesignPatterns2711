@@ -13,8 +13,7 @@ public class Demo {
                     resource.work();
 
                     Thread.sleep(new Random().nextInt(200));
-                    ConnectionPoolGrowLimit.returnConnectionToPool(resource);
-
+                    ConnectionPoolGrowLimit.releaseConnectionToPool(resource);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
