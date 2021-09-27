@@ -14,14 +14,18 @@ public class ConnectionPoolGrowLimit {
     }
 
     public static ConnectionResource getConnectionFromPool() throws Exception {
-        if(resourceList.size() > 0) {
-            ConnectionResource connectionResource = resourceList
-                    .get(resourceList.size() - 1);
-            resourceList.remove(connectionResource);
-
-            return connectionResource;
+        if (resourceList.size() > 0) {
+            ConnectionResource connectionResource;
+            for (int i = 0; i < resourceList.size(); i++) {
+                connectionResource = resourceList.get(i);
+                if (!connectionResource.isBlocked()) {
+                    resourceList.remove(connectionResource);
+                    return connectionResource;
+                }
+            }
+            return null;
         } else {
-            if(capacity <= 20) {
+            if (capacity <= 20) {
                 ConnectionResource connectionResource = new ConnectionResource();
                 capacity++;
                 return connectionResource;
@@ -34,5 +38,12 @@ public class ConnectionPoolGrowLimit {
 
     public static void returnConnectionToPool(ConnectionResource connectionResource) {
         resourceList.add(connectionResource);
+        connectionResource.setBlocked(true);
+        if (resourceList.size() - capacity > 6) {
+            for (int i = resourceList.size(); i > 9 ; i--) {
+                resourceList.remove(resourceList.size() - 1);
+            }
+        }
+        capacity = 10;
     }
 }

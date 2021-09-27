@@ -10,10 +10,12 @@ public class Demo {
                     Thread.sleep(new Random().nextInt(200));
 
                     ConnectionResource resource = ConnectionPoolGrowLimit.getConnectionFromPool();
-                    resource.work();
+                    if (resource != null) {
+                        resource.work();
 
-                    Thread.sleep(new Random().nextInt(200));
-                    ConnectionPoolGrowLimit.returnConnectionToPool(resource);
+                        Thread.sleep(new Random().nextInt(200));
+                        ConnectionPoolGrowLimit.returnConnectionToPool(resource);
+                    }
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
