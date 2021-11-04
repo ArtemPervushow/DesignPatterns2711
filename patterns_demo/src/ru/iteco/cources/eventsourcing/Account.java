@@ -70,4 +70,6 @@ public class Account {
     public void setBalance(float balance) {
         this.balance = balance;
     }
+
+    public void changeNameThatDoesNotEvenExist(String newName) {}
 }

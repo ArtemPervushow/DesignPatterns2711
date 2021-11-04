@@ -49,6 +49,14 @@ public class AccountService {
         eventSet.add(event);
     }
 
+    public void changeName(int id, String newName) {
+        AccountEvent event = new AccountEvent(AccountEventType.CHANGE_NAME,
+                id,
+                new ChangeNameData(newName));
+
+        eventSet.add(event);
+    }
+
     public Account getAccount(int id) {
         Account account = null;
 
@@ -89,6 +97,10 @@ public class AccountService {
 
                         account.setOwner(changeOwnerData.getNewOwner());
                         break;
+                    case CHANGE_NAME:
+                        ChangeNameData changeNameData = (ChangeNameData) event.getEventData();
+
+                        account.changeNameThatDoesNotEvenExist(changeNameData.getNewName());
                     case CLOSE:
                         CloseData closeData = (CloseData) event.getEventData();
 
