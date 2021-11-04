@@ -57,4 +57,11 @@ public class AccountCommandService {
             accountQueryService.processEvent(command.apply());
         }
     }
+
+    public void cancelCommand(int id) {
+        accountQueryService.clear();
+        accountCommandList.stream()
+                .filter(a -> a.getId() == id)
+                .forEach(accountCommandList::remove);
+    }
 }
