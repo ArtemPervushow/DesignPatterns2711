@@ -5,5 +5,6 @@ public enum AccountEventType {
     DEPOSIT,
     WIDTHDRAW,
     CHANGE_OWNER,
+    CHANGE_NAME,
     CLOSE
 }
