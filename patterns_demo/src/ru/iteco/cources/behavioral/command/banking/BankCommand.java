@@ -1,8 +1,10 @@
 package ru.iteco.cources.behavioral.command.banking;
 
+import java.math.BigDecimal;
+
 public abstract class BankCommand {
     BankCommandRunner runner;
-    private float balance;
+    private BigDecimal balance = BigDecimal.ZERO;
 
     public BankCommand(BankCommandRunner runner) {
         this.runner = runner;

@@ -1,14 +1,16 @@
 package ru.iteco.cources.behavioral.command.banking;
 
+import java.math.BigDecimal;
+
 public class BankCommandRunner {
-    private float bankBalance;
+    private BigDecimal bankBalance = BigDecimal.ZERO;
     private BankCommandHistory commandHistory = new BankCommandHistory();
 
-    public float getBankBalance() {
+    public BigDecimal getBankBalance() {
         return bankBalance;
     }
 
-    public void setBankBalance(float bankBalance) {
+    public void setBankBalance(BigDecimal bankBalance) {
         this.bankBalance = bankBalance;
     }
 
