@@ -4,9 +4,18 @@ import ru.iteco.cources.behavioral.statecommupgr.comm.DocumentOperation;
 
 public class Document {
     private DocumentState documentState;
+    private String content;
 
     public Document() {
         documentState = new NewState(this);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public DocumentState getDocumentState() {
