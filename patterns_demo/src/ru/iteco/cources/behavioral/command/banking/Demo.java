@@ -1,5 +1,6 @@
 package ru.iteco.cources.behavioral.command.banking;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public class Demo {
@@ -33,5 +34,12 @@ public class Demo {
             bankCommandRunner.undo();
             System.out.println(bankCommandRunner.getBankBalance());
         }
+
+        bankCommandRunner.runCommand(new AddMoney(bankCommandRunner, 12321));
+        System.out.println(bankCommandRunner.getBankBalance());
+        bankCommandRunner.runCommand(new ExchangeMoney(bankCommandRunner, BigDecimal.valueOf(0.014)));
+        System.out.println(bankCommandRunner.getBankBalance());
+        bankCommandRunner.undo();
+        System.out.println(bankCommandRunner.getBankBalance());
     }
 }
