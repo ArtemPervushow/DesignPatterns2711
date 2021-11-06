@@ -1,13 +1,13 @@
 package ru.iteco.cources.creational.objectpool;
 
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 30; i++) {
             Thread thread = new Thread(() -> {
                 try {
-                    ConnectionResource resource = ConnectionPoolGrowLimit.getConnectionResourceFromPool();
+                    ConnectionResource resource = ConnectionPoolGrowLessLimit.getConnectionResourceFromPool();
                     resource.work();
-                    ConnectionPoolGrowLimit.returnConnectionResourceToPool(resource);
+                    ConnectionPoolGrowLessLimit.returnConnectionResourceToPool(resource);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
