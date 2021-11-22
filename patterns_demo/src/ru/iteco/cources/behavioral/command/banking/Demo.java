@@ -10,7 +10,7 @@ public class Demo {
         for (int i = 0; i < 10; i++) {
             Thread.sleep(500);
 
-            switch (random.nextInt(2)){
+            switch (random.nextInt(3)){
                 case 0:
                     BankCommand command1 = new AddMoney(bankCommandRunner,
                                             1000f);
@@ -21,8 +21,15 @@ public class Demo {
                                                    1000f);
                     bankCommandRunner.runCommand(command2);
                     break;
+                case 2: {
+                    BankCommand command3 = new BuyStableCurrency(bankCommandRunner, 1f);
+                    bankCommandRunner.runCommand(command3);
+                    break;
+                }
             }
-            System.out.println(bankCommandRunner.getBankBalance());
+            System.out.printf("Balance: %.2f%n", bankCommandRunner.getBankBalance());
+            System.out.printf("Wheat: %.2f%n", bankCommandRunner.getWheatBalance());
+            System.out.println();
         }
 
         System.out.println("-----------------");
@@ -31,7 +38,9 @@ public class Demo {
             Thread.sleep(500);
 
             bankCommandRunner.undo();
-            System.out.println(bankCommandRunner.getBankBalance());
+            System.out.printf("Balance: %.2f%n", bankCommandRunner.getBankBalance());
+            System.out.printf("Wheat: %.2f%n", bankCommandRunner.getWheatBalance());
+            System.out.println();
         }
     }
 }

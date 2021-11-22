@@ -1,7 +1,11 @@
 package ru.iteco.cources.behavioral.command.banking;
 
 public class BankCommandRunner {
+    private final float wheatCourse = 0.23f;
+    private final float bankMargin = 0.4f;
+
     private float bankBalance;
+    private float wheatBalance;
     private BankCommandHistory commandHistory = new BankCommandHistory();
 
     public float getBankBalance() {
@@ -10,6 +14,22 @@ public class BankCommandRunner {
 
     public void setBankBalance(float bankBalance) {
         this.bankBalance = bankBalance;
+    }
+
+    public float getWheatBalance() {
+        return wheatBalance;
+    }
+
+    public void setWheatBalance(float wheatBalance) {
+        this.wheatBalance = wheatBalance;
+    }
+
+    public float getWheatCourse() {
+        return wheatCourse;
+    }
+
+    public float getBankMargin() {
+        return bankMargin;
     }
 
     public void runCommand(BankCommand command) {
