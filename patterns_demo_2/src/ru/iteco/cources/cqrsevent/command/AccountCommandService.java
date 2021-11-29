@@ -17,44 +17,59 @@ public class AccountCommandService {
 
     public void createAccount(int id, String owner) {
         AccountCommand command = new CreateAccountCommand(id, owner);
-        accountCommandList.add(command);
+        if (!accountCommandList.contains(command)) {
+            accountCommandList.add(command);
 
-        accountQueryService.processEvent(command.apply());
+            accountQueryService.processEvent(command.apply());
+        }
     }
 
     public void addMoney(int id, float money) {
         AccountCommand command = new AppendMoneyCommand(id, money);
-        accountCommandList.add(command);
+        if (!accountCommandList.contains(command)) {
+            accountCommandList.add(command);
 
-        accountQueryService.processEvent(command.apply());
+            accountQueryService.processEvent(command.apply());
+        }
     }
 
     public void widthdrawMoney(int id, float money) {
         AccountCommand command = new WithdrawMoneyCommand(id, money);
-        accountCommandList.add(command);
+        if (!accountCommandList.contains(command)) {
+            accountCommandList.add(command);
 
-        accountQueryService.processEvent(command.apply());
+            accountQueryService.processEvent(command.apply());
+        }
     }
 
     public void closeAccount(int id) {
         AccountCommand command = new CloseAccountCommand(id);
-        accountCommandList.add(command);
+        if (!accountCommandList.contains(command)) {
+            accountCommandList.add(command);
 
-        accountQueryService.processEvent(command.apply());
+            accountQueryService.processEvent(command.apply());
+        }
     }
 
     public void changeOwner(int id, String newOwner) {
         AccountCommand command = new ChangeOwnerCommand(id, newOwner);
-        accountCommandList.add(command);
+        if (!accountCommandList.contains(command)) {
+            accountCommandList.add(command);
 
-        accountQueryService.processEvent(command.apply());
+            accountQueryService.processEvent(command.apply());
+        }
     }
 
     public void reprocessAllAccounts() {
         accountQueryService.clear();
         for (AccountCommand command:
-             accountCommandList) {
+                accountCommandList) {
             accountQueryService.processEvent(command.apply());
         }
+    }
+
+    public void cancellCommand(int id) {
+        AccountCommand command = accountCommandList.get(id);
+        accountCommandList.remove(command);
     }
 }
