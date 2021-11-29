@@ -44,6 +44,11 @@ public class AccountQueryService {
 
                 account.setActive(false);
                 break;
+
+            case CANCELL:
+                CancellData cancellData = (CancellData) event.getEventData();
+
+
         }
 
         accounts.put(event.getEntityId(), account);
